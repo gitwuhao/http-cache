@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>http cache</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    var html = [
+        '<div id="test"></div>',
+        '<img src="image/1.png" />',
+        '<img src="nocache/icon/a.png" />',
+        '<img srssc="http://g.alicdn.com/s.gif" />',
+        '<img srssc="http://gtms02.alicdn.com/tps/i2/TB1xJqPHVXXXXbqXFXXOl_ZMpXX-320-85.gif" />',
+        '<div class="box">',
+        '</div>',
+    ].join('');
+    setTimeout(function() {
+        document.body.innerHTML = html;
+        loadJS('js/a.js');
+        loadCSS('css/a.css');
+        loadCSS('css/b.css');
+        loadCSS('nocache/css/a.css');
+    }, 1000);
+
+    function loadJS(src) {
+        var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement,
+            pack = document.createElement("script");
+        pack.type = "text/javascript";
+        pack.src = src;
+        head.insertBefore(pack, head.lastChild);
+    };
+
+
+    function loadCSS(src) {
+        var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement,
+            pack = document.createElement("link");
+        pack.rel = "stylesheet";
+        pack.type = "text/css";
+        pack.href = src;
+        head.insertBefore(pack, head.lastChild);
+    };
+    </script>
+</body>
+
+</html>
